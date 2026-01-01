@@ -197,35 +197,53 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwi59ZVhP_fjvpMtrF6fBx9e8-p-qj4Kby19a-Miyt5F0C6llGiFUQgMyB5Ql_dTUtm/exec";
 
     // Hizmetleri Çekme
-    async function getServices() {
-        try {
-            const response = await fetch(SCRIPT_URL);
-            const data = await response.json();
-            const container = document.getElementById('hizmetler-alani');
-            const select = document.getElementById('cust-service');
-            container.innerHTML = '';
-
-            data.forEach(hizmet => {
-                // Kartları Oluştur
-                container.innerHTML += `
-                    <div class="card" data-aos="fade-up">
-                        <i class="fas fa-shield-alt fa-2x" style="color:var(--primary)"></i>
-                        <h3 style="margin-top:15px;">${hizmet.HizmetAdı}</h3>
-                        <p style="font-size:0.9rem; opacity:0.8;">${hizmet.Aciklama}</p>
-                        <span class="price">${hizmet.Fiyat} ₺</span>
-                        <button onclick="openModal('${hizmet.HizmetAdı}')" class="btn btn-primary btn-block">Randevu Al</button>
-                    </div>
-                `;
-                // Select listesini doldur
-                let opt = document.createElement('option');
-                opt.value = hizmet.HizmetAdı;
-                opt.innerHTML = hizmet.HizmetAdı;
-                select.appendChild(opt);
-            });
-        } catch (e) {
-            console.log("Hata:", e);
+   async function getServices() {
+    try {
+        const response = await fetch(SCRIPT_URL);
+        const data = await response.json();
+        const container = document.getElementById('hizmetler-alani');
+        const select = document.getElementById('cust-service');
+        
+        if (!data || data.length === 0) {
+            container.innerHTML = '<p style="text-align:center; width:100%;">Henüz hizmet listesi boş.</p>';
+            return;
         }
+
+        container.innerHTML = '';
+        data.forEach(hizmet => {
+            // Sütun isimlerini tam eşleştirelim (Büyük/Küçük harf duyarlı)
+            const ad = hizmet["HizmetAdı"] || hizmet.HizmetAdi || "Hizmet";
+            const fiyat = hizmet["Fiyat"] || "Fiyat Sorun";
+            const aciklama = hizmet["Aciklama"] || "";
+            const resim = hizmet["ResimURL"] || "";
+
+            container.innerHTML += `
+                <div class="card" data-aos="fade-up">
+                    <div style="width:100%; height:180px; overflow:hidden; border-radius:15px; margin-bottom:15px; background: #1a1a1c; border: 1px solid var(--glass-border);">
+                        <img src="${resim}" 
+                             alt="${ad}" 
+                             style="width:100%; height:100%; object-fit:cover;"
+                             onerror="this.src='https://placehold.co/400x250/1a1a1c/white?text=Sezgin+Airbag'">
+                    </div>
+                    
+                    <h3 style="margin-bottom:10px; font-family:'Orbitron'; font-size:1.1rem;">${ad}</h3>
+                    <p style="font-size:0.85rem; opacity:0.7; height:45px; overflow:hidden;">${aciklama}</p>
+                    <span class="price">${fiyat} ₺</span>
+                    <button onclick="openModal('${ad}')" class="btn btn-primary btn-block" style="margin-top:10px;">Randevu Al</button>
+                </div>
+            `;
+            
+            // Seçenek listesini güncelle
+            let opt = document.createElement('option');
+            opt.value = ad;
+            opt.innerHTML = ad;
+            select.appendChild(opt);
+        });
+    } catch (e) {
+        console.error("Hata:", e);
+        document.getElementById('hizmetler-alani').innerHTML = '<p>Veriler yüklenemedi. Lütfen internetinizi veya API bağlantısını kontrol edin.</p>';
     }
+}
 
     // Modal İşlemleri
     function openModal(serviceName) {
