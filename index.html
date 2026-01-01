@@ -1,15 +1,16 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sezgin Airbag | Antalya Akdeniz Sanayi Airbag & ESP Tamiri</title>
-    <meta name="description" content="Antalya Kepez Sezgin Airbag. Müslüm ve Yavuz Usta ile Airbag beyin sıfırlama, kemer tamiri ve ESP onarımı.">
+    <title>Sezgin Airbag | Antalya Oto Güvenlik Sistemleri</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="57x57" href="public/apple-icon-57x57.png">
+    
+    <meta name="theme-color" content="#ff3b30">
+        <link rel="apple-touch-icon" sizes="57x57" href="public/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="public/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="public/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="public/apple-icon-76x76.png">
@@ -28,14 +29,13 @@
 
 <meta name="msapplication-TileColor" content="#0f0f12">
 <meta name="msapplication-TileImage" content="public/ms-icon-144x144.png">
-<meta name="theme-color" content="#ff3b30">
-    
+
     <style>
         :root {
             --primary: #ff3b30;
             --accent: #ffcc00;
             --bg: #0f0f12;
-            --glass: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
@@ -44,265 +44,238 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
             color: #fff;
-            line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        /* Arka Plan Efekti */
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0f0f12 100%);
-            z-index: -1;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* Glassmorphism Nav */
+        /* Navigation */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(15, 15, 18, 0.7);
+            background: rgba(15, 15, 18, 0.8);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--glass-border);
             padding: 15px 0;
         }
 
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Orbitron'; font-weight: bold; font-size: 1.4rem; letter-spacing: 2px; }
+        .logo { font-family: 'Orbitron'; font-weight: bold; font-size: 1.2rem; }
         .logo span { color: var(--primary); }
 
-        /* Hero Section */
-        .hero {
-            padding: 150px 0 100px;
-            text-align: center;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        /* Hero */
+        .hero { padding: 140px 0 60px; text-align: center; }
+        .hero h1 { font-family: 'Orbitron'; font-size: clamp(1.8rem, 5vw, 3.5rem); margin-bottom: 15px; }
+        .hero p { opacity: 0.8; max-width: 700px; margin: 0 auto; }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center; font-family: 'Orbitron'; margin: 60px 0 30px;
+            font-size: 1.5rem; color: var(--accent);
         }
 
-        .hero h1 { 
-            font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); 
-            margin-bottom: 20px; text-transform: uppercase;
-        }
-
-        /* Hizmet Kartları (Dinamik) */
+        /* Hizmet Grid */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; margin: 50px 0;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; margin-bottom: 50px;
         }
 
         .card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
+            background: var(--card-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 30px;
-            transition: 0.4s;
-            text-align: center;
+            border-radius: 20px; padding: 20px;
+            transition: 0.3s; position: relative;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+
+        /* Before/After Slider */
+        .comparison-container {
+            position: relative; width: 100%; height: 250px;
+            overflow: hidden; border-radius: 15px; margin-bottom: 15px;
+            cursor: ew-resize; border: 1px solid var(--glass-border);
+        }
+        .comparison-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; pointer-events: none;
+        }
+        .img-before {
+            position: absolute; top: 0; left: 0; height: 100%;
+            z-index: 2; border-right: 2px solid var(--primary);
+        }
+        .comparison-slider-bar {
+            position: absolute; top: 0; bottom: 0; width: 2px;
+            background: var(--primary); z-index: 3; pointer-events: none;
         }
 
-        .card:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.2);
-        }
-
-        .price { color: var(--accent); font-size: 1.5rem; font-weight: bold; margin: 15px 0; display: block;}
-
-        /* Ustalar Bölümü */
-        .ustalar {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 50px 0;
-        }
-
-        .usta-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 25px; padding: 40px; text-align: center;
-            border: 1px solid var(--glass-border);
-        }
-
-        /* Butonlar */
+        /* Buttons */
         .btn {
-            display: inline-block; padding: 12px 25px; border-radius: 50px;
-            text-decoration: none; font-weight: 600; cursor: pointer; border: none;
-            transition: 0.3s;
+            display: inline-block; padding: 12px 20px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; text-align: center;
+            transition: 0.3s; border: none; cursor: pointer;
         }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-wp { background: #25d366; color: white; margin-left: 10px; }
-        .btn-block { width: 100%; margin-top: 15px; }
+        .btn-primary { background: var(--primary); color: white; width: 100%; }
+        .btn-wp { background: #25d366; color: white; margin-top: 10px; width: 100%; }
 
-        /* Randevu Modalı */
+        /* Modal */
         .modal {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px); align-items: center; justify-content: center;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            align-items: center; justify-content: center; backdrop-filter: blur(10px);
         }
-
         .modal-content {
-            background: #1a1a1c; padding: 40px; border-radius: 30px;
-            width: 90%; max-width: 500px; border: 1px solid var(--primary);
+            background: #1a1a1c; padding: 30px; border-radius: 25px;
+            width: 90%; max-width: 450px; border: 1px solid var(--primary);
         }
-
         input, select {
             width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px;
-            border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white;
+            border: 1px solid var(--glass-border); background: #0f0f12; color: #fff;
         }
 
-        @media (max-width: 768px) { .ustalar { grid-template-columns: 1fr; } }
+        /* Ustalar Section */
+        .ustalar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+        
+        @media (max-width: 768px) {
+            .ustalar-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
-
 <nav>
     <div class="container nav-content">
         <div class="logo">SEZGİN <span>AIRBAG</span></div>
-        <a href="tel:05457289717" class="btn btn-primary"><i class="fas fa-phone"></i> ARA</a>
+        <a href="tel:05457289717" style="color:var(--primary); text-decoration:none; font-weight:bold;"><i class="fas fa-phone"></i> ARA</a>
     </div>
 </nav>
 
 <section class="hero container">
-    <h1 data-aos="zoom-in">Güvenlikte Uzman <br> <span style="color:var(--primary)">Teknik Servis</span></h1>
-    <p data-aos="fade-up">Antalya Akdeniz Sanayi Sitesi'nde Airbag ve ESP Çözümleri</p>
+    <h1 data-aos="fade-down">Antalya Oto Güvenlik Sistemleri</h1>
+    <p data-aos="fade-up">Müslüm & Yavuz Usta uzmanlığında Airbag, ESP ve Beyin Tamiri. Akdeniz Sanayi Sitesi'nde profesyonel çözümler.</p>
 </section>
 
-<section class="container">
-    <div class="grid" id="hizmetler-alani">
-        <p style="text-align:center; grid-column: 1/-1;">Hizmetler yükleniyor...</p>
-    </div>
-</section>
+<div class="container">
+    <h2 class="section-title">Hizmetlerimiz</h2>
+    <div class="grid" id="hizmetler-listesi">
+        </div>
 
-<section class="container">
-    <div class="ustalar">
-        <div class="usta-card" data-aos="fade-right">
-            <i class="fas fa-microchip fa-3x" style="color:var(--primary); margin-bottom:15px;"></i>
+    <h2 class="section-title">Önce / Sonra Galerisi</h2>
+    <div class="grid" id="galeri-listesi">
+        </div>
+
+    <div class="ustalar-grid">
+        <div class="card" data-aos="fade-right">
             <h3>Müslüm Usta</h3>
-            <p>Beyin Tamiri & Yazılım Uzmanı</p>
-            <a href="tel:05457289717" class="btn btn-primary btn-block">Hemen Ara</a>
-            <a href="https://wa.me/905457289717" class="btn btn-wp btn-block">WhatsApp Mesaj</a>
+            <p>Beyin & Yazılım Uzmanı</p>
+            <a href="tel:05457289717" class="btn btn-primary"><i class="fas fa-phone"></i> Ara</a>
+            <a href="https://wa.me/905457289717" class="btn btn-wp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
-        <div class="usta-card" data-aos="fade-left">
-            <i class="fas fa-tools fa-3x" style="color:var(--accent); margin-bottom:15px;"></i>
+        <div class="card" data-aos="fade-left">
             <h3>Yavuz Usta</h3>
-            <p>Mekanik & Kemer Sistemleri Uzmanı</p>
-            <a href="tel:05458320459" class="btn btn-primary btn-block">Hemen Ara</a>
-            <a href="https://wa.me/905458320459" class="btn btn-wp btn-block">WhatsApp Mesaj</a>
+            <p>Mekanik & Kemer Uzmanı</p>
+            <a href="tel:05458320459" class="btn btn-primary"><i class="fas fa-phone"></i> Ara</a>
+            <a href="https://wa.me/905458320459" class="btn btn-wp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
-    </div>
-</section>
-
-<div id="bookingModal" class="modal">
-    <div class="modal-content">
-        <h2 style="font-family:'Orbitron'; margin-bottom:20px;">Randevu Al</h2>
-        <form id="randevuForm">
-            <input type="text" id="cust-name" placeholder="Adınız Soyadınız" required>
-            <input type="tel" id="cust-tel" placeholder="Telefon Numaranız" required>
-            <input type="text" id="cust-plate" placeholder="Araç Plakası" required>
-            <select id="cust-service">
-                <option value="Genel Kontrol">Hizmet Seçin</option>
-            </select>
-            <button type="submit" class="btn btn-primary btn-block">TALEBİ GÖNDER</button>
-            <button type="button" onclick="closeModal()" class="btn btn-block" style="background:transparent;">Kapat</button>
-        </form>
     </div>
 </div>
 
-<footer class="container" style="text-align:center; padding:50px 0; opacity:0.6; font-size:0.9rem;">
-    <p>Şafak Mah. 5024. Sk. Akdeniz Sanayi Sitesi No:12 Kepez / Antalya</p>
+<footer style="text-align:center; padding:60px 0; opacity:0.5; font-size:0.8rem;">
+    <p>Şafak Mah. 5024. Sk. No:12 Akdeniz Sanayi Sitesi - Kepez/Antalya</p>
 </footer>
+
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <h3 style="margin-bottom:15px; font-family:'Orbitron';">Randevu Al</h3>
+        <form id="randevuForm">
+            <input type="text" id="m_ad" placeholder="Adınız Soyadınız" required>
+            <input type="tel" id="m_tel" placeholder="Telefon Numaranız" required>
+            <input type="text" id="m_plaka" placeholder="Araç Plakası" required>
+            <select id="m_hizmet"></select>
+            <button type="submit" class="btn btn-primary">TALEBİ GÖNDER</button>
+            <button type="button" onclick="closeModal()" class="btn btn-wp" style="background:transparent; color:#aaa;">Kapat</button>
+        </form>
+    </div>
+</div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init();
 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlB3QFoPdSbmxWwb9PV3eJUQ0SbpqpCVmtZ6O1pTrvIy1m7qrnCHlZxG_VC_QhBEc/exec";
 
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwi59ZVhP_fjvpMtrF6fBx9e8-p-qj4Kby19a-Miyt5F0C6llGiFUQgMyB5Ql_dTUtm/exec";
-
-    // Hizmetleri Çekme
-   async function getServices() {
-    try {
-        const response = await fetch(SCRIPT_URL);
-        const data = await response.json();
-        const container = document.getElementById('hizmetler-alani');
-        const select = document.getElementById('cust-service');
-        
-        if (!data || data.length === 0) {
-            container.innerHTML = '<p style="text-align:center; width:100%;">Henüz hizmet listesi boş.</p>';
-            return;
-        }
-
-        container.innerHTML = '';
-        data.forEach(hizmet => {
-            // Sütun isimlerini tam eşleştirelim (Büyük/Küçük harf duyarlı)
-            const ad = hizmet["HizmetAdı"] || hizmet.HizmetAdi || "Hizmet";
-            const fiyat = hizmet["Fiyat"] || "Fiyat Sorun";
-            const aciklama = hizmet["Aciklama"] || "";
-            const resim = hizmet["ResimURL"] || "";
-
-            container.innerHTML += `
-                <div class="card" data-aos="fade-up">
-                    <div style="width:100%; height:180px; overflow:hidden; border-radius:15px; margin-bottom:15px; background: #1a1a1c; border: 1px solid var(--glass-border);">
-                        <img src="${resim}" 
-                             alt="${ad}" 
-                             style="width:100%; height:100%; object-fit:cover;"
-                             onerror="this.src='https://placehold.co/400x250/1a1a1c/white?text=Sezgin+Airbag'">
-                    </div>
-                    
-                    <h3 style="margin-bottom:10px; font-family:'Orbitron'; font-size:1.1rem;">${ad}</h3>
-                    <p style="font-size:0.85rem; opacity:0.7; height:45px; overflow:hidden;">${aciklama}</p>
-                    <span class="price">${fiyat} ₺</span>
-                    <button onclick="openModal('${ad}')" class="btn btn-primary btn-block" style="margin-top:10px;">Randevu Al</button>
-                </div>
-            `;
+    async function loadData() {
+        try {
+            const res = await fetch(SCRIPT_URL);
+            const data = await res.json();
             
-            // Seçenek listesini güncelle
-            let opt = document.createElement('option');
-            opt.value = ad;
-            opt.innerHTML = ad;
-            select.appendChild(opt);
-        });
-    } catch (e) {
-        console.error("Hata:", e);
-        document.getElementById('hizmetler-alani').innerHTML = '<p>Veriler yüklenemedi. Lütfen internetinizi veya API bağlantısını kontrol edin.</p>';
-    }
-}
+            // 1. Hizmetleri Yükle
+            const hList = document.getElementById('hizmetler-listesi');
+            const hSelect = document.getElementById('m_hizmet');
+            hList.innerHTML = '';
+            data.hizmetler.forEach(h => {
+                hList.innerHTML += `
+                    <div class="card" data-aos="zoom-in">
+                        <img src="${h.ResimURL}" style="width:100%; height:150px; object-fit:cover; border-radius:10px; margin-bottom:10px;">
+                        <h4>${h.HizmetAdı}</h4>
+                        <p style="font-size:0.8rem; opacity:0.7;">${h.Aciklama}</p>
+                        <div style="color:var(--accent); font-weight:bold; margin:10px 0;">${h.Fiyat} ₺</div>
+                        <button onclick="openModal('${h.HizmetAdı}')" class="btn btn-primary">Randevu Al</button>
+                    </div>`;
+                hSelect.innerHTML += `<option value="${h.HizmetAdı}">${h.HizmetAdı}</option>`;
+            });
 
-    // Modal İşlemleri
-    function openModal(serviceName) {
+            // 2. Galeri Yükle
+            const gList = document.getElementById('galeri-listesi');
+            gList.innerHTML = '';
+            data.galeri.forEach((g, i) => {
+                gList.innerHTML += `
+                    <div class="card">
+                        <div class="comparison-container" onmousemove="moveSlider(event, this)" ontouchmove="moveSlider(event, this)">
+                            <img src="${g.SonraResimURL}" class="comparison-img">
+                            <div class="img-before" style="width: 50%;">
+                                <img src="${g.OnceResimURL}" style="width: 1200px; height: 250px; object-fit: cover; max-width:none;">
+                            </div>
+                            <div class="comparison-slider-bar" style="left: 50%;"></div>
+                        </div>
+                        <h4 style="font-size:0.9rem;">${g.HizmetAdi}</h4>
+                    </div>`;
+            });
+
+        } catch (e) { console.error("Veri hatası:", e); }
+    }
+
+    function moveSlider(e, container) {
+        const rect = container.getBoundingClientRect();
+        const x = (e.pageX || e.touches[0].pageX) - rect.left;
+        const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        container.querySelector('.img-before').style.width = percent + "%";
+        container.querySelector('.comparison-slider-bar').style.left = percent + "%";
+    }
+
+    function openModal(val) {
         document.getElementById('bookingModal').style.display = 'flex';
-        if(serviceName) document.getElementById('cust-service').value = serviceName;
+        if(val) document.getElementById('m_hizmet').value = val;
     }
 
-    function closeModal() {
-        document.getElementById('bookingModal').style.display = 'none';
-    }
+    function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
 
-    // Randevu Gönderimi
-    document.getElementById('randevuForm').addEventListener('submit', async (e) => {
+    document.getElementById('randevuForm').onsubmit = async (e) => {
         e.preventDefault();
         const btn = e.target.querySelector('button');
-        btn.innerHTML = "Gönderiliyor...";
+        btn.innerText = "Gönderiliyor...";
         
         const payload = {
-            ad: document.getElementById('cust-name').value,
-            tel: document.getElementById('cust-tel').value,
-            plaka: document.getElementById('cust-plate').value,
-            hizmet: document.getElementById('cust-service').value
+            ad: document.getElementById('m_ad').value,
+            tel: document.getElementById('m_tel').value,
+            plaka: document.getElementById('m_plaka').value,
+            hizmet: document.getElementById('m_hizmet').value
         };
 
-        try {
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify(payload)
-            });
-            alert("Randevunuz iletildi. Müslüm veya Yavuz Usta size dönüş yapacaktır.");
-            closeModal();
-            e.target.reset();
-        } catch (err) {
-            alert("Bir hata oluştu.");
-        }
-        btn.innerHTML = "TALEBİ GÖNDER";
-    });
+        await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+        alert("Talep Alındı!");
+        closeModal();
+        btn.innerText = "TALEBİ GÖNDER";
+    };
 
-    window.onload = getServices;
+    window.onload = loadData;
 </script>
 
 </body>
