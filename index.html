@@ -3,218 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sezgin Airbag | Antalya Airbag & ESP Tamir Merkezi</title>
-    <meta name="description" content="Antalya Sezgin Airbag: Müslüm ve Yavuz Usta ile Airbag, ESP, Beyin ve Emniyet Kemeri tamirinde uzman hizmet.">
+    <title>Sezgin Airbag | Antalya Akdeniz Sanayi Airbag & ESP Tamiri</title>
+    <meta name="description" content="Antalya Kepez Sezgin Airbag. Müslüm ve Yavuz Usta ile Airbag beyin sıfırlama, kemer tamiri ve ESP onarımı.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    
     <style>
         :root {
             --primary: #ff3b30;
             --accent: #ffcc00;
-            --bg: #0a0a0b;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --glass: rgba(255, 255, 255, 0.1);
+            --bg: #0f0f12;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
             color: #fff;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .glass-nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(10, 10, 11, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--glass);
+        /* Arka Plan Efekti */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0f0f12 100%);
+            z-index: -1;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
+        /* Glassmorphism Nav */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(15, 15, 18, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 15px 0;
+        }
+
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron'; font-weight: bold; font-size: 1.4rem; letter-spacing: 2px; }
+        .logo span { color: var(--primary); }
+
         /* Hero Section */
         .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 80px;
+            padding: 150px 0 100px;
+            text-align: center;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
 
-        .hero-text h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero h1 { 
+            font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); 
+            margin-bottom: 20px; text-transform: uppercase;
         }
 
-        model-viewer {
-            width: 50%;
-            height: 500px;
-            --poster-color: transparent;
-        }
-
-        /* Hizmet Kartları */
-        .services-grid {
+        /* Hizmet Kartları (Dinamik) */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; margin: 50px 0;
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 25px;
-            transition: 0.3s;
-            backdrop-filter: blur(5px);
+            padding: 30px;
+            transition: 0.4s;
+            text-align: center;
         }
 
         .card:hover {
             border-color: var(--primary);
             transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.2);
         }
 
-        .price-tag {
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-top: 15px;
-            display: block;
-        }
+        .price { color: var(--accent); font-size: 1.5rem; font-weight: bold; margin: 15px 0; display: block;}
 
-        /* Ustalar Alanı */
-        .ustalar-section {
-            display: flex;
-            gap: 20px;
-            margin: 100px 0;
+        /* Ustalar Bölümü */
+        .ustalar {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 50px 0;
         }
 
         .usta-card {
-            flex: 1;
-            background: linear-gradient(145deg, #1a1a1c, #0a0a0b);
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            border: 1px solid var(--glass);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 25px; padding: 40px; text-align: center;
+            border: 1px solid var(--glass-border);
         }
 
-        .usta-card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
-
+        /* Butonlar */
         .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
+            display: inline-block; padding: 12px 25px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; cursor: pointer; border: none;
             transition: 0.3s;
         }
-
-        .btn-call { background: var(--primary); color: white; }
+        .btn-primary { background: var(--primary); color: white; }
         .btn-wp { background: #25d366; color: white; margin-left: 10px; }
+        .btn-block { width: 100%; margin-top: 15px; }
 
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; height: auto; }
-            model-viewer { width: 100%; height: 300px; }
-            .hero-text h1 { font-size: 2rem; }
-            .ustalar-section { flex-direction: column; }
+        /* Randevu Modalı */
+        .modal {
+            display: none; position: fixed; z-index: 2000; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px); align-items: center; justify-content: center;
         }
+
+        .modal-content {
+            background: #1a1a1c; padding: 40px; border-radius: 30px;
+            width: 90%; max-width: 500px; border: 1px solid var(--primary);
+        }
+
+        input, select {
+            width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px;
+            border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white;
+        }
+
+        @media (max-width: 768px) { .ustalar { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <nav class="glass-nav">
-        <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-            <div style="font-family:'Orbitron'; font-weight:bold; font-size:1.5rem;">SEZGİN <span style="color:var(--primary)">AIRBAG</span></div>
-            <div>
-                <a href="tel:05457289717" style="color:#fff; text-decoration:none;"><i class="fas fa-phone"></i> Hemen Ara</a>
-            </div>
+<div class="bg-glow"></div>
+
+<nav>
+    <div class="container nav-content">
+        <div class="logo">SEZGİN <span>AIRBAG</span></div>
+        <a href="tel:05457289717" class="btn btn-primary"><i class="fas fa-phone"></i> ARA</a>
+    </div>
+</nav>
+
+<section class="hero container">
+    <h1 data-aos="zoom-in">Güvenlikte Uzman <br> <span style="color:var(--primary)">Teknik Servis</span></h1>
+    <p data-aos="fade-up">Antalya Akdeniz Sanayi Sitesi'nde Airbag ve ESP Çözümleri</p>
+</section>
+
+<section class="container">
+    <div class="grid" id="hizmetler-alani">
+        <p style="text-align:center; grid-column: 1/-1;">Hizmetler yükleniyor...</p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="ustalar">
+        <div class="usta-card" data-aos="fade-right">
+            <i class="fas fa-microchip fa-3x" style="color:var(--primary); margin-bottom:15px;"></i>
+            <h3>Müslüm Usta</h3>
+            <p>Beyin Tamiri & Yazılım Uzmanı</p>
+            <a href="tel:05457289717" class="btn btn-primary btn-block">Hemen Ara</a>
+            <a href="https://wa.me/905457289717" class="btn btn-wp btn-block">WhatsApp Mesaj</a>
         </div>
-    </nav>
-
-    <section class="container hero">
-        <div class="hero-text" data-aos="fade-right">
-            <span style="color:var(--primary); font-weight:bold; letter-spacing:2px;">ANTALYA KEPEZ</span>
-            <h1>Güvenliğiniz <br> Bizim İşimiz</h1>
-            <p>Airbag, ESP, Beyin ve Emniyet Kemeri sistemlerinde profesyonel çözümler.</p>
-            <div class="price-info" style="background:var(--glass); padding:15px; border-radius:10px;">
-                <i class="fas fa-info-circle"></i> Kemer Halat Değişimi: <b>Tane 2000₺ | Çift 3500₺</b>
-            </div>
+        <div class="usta-card" data-aos="fade-left">
+            <i class="fas fa-tools fa-3x" style="color:var(--accent); margin-bottom:15px;"></i>
+            <h3>Yavuz Usta</h3>
+            <p>Mekanik & Kemer Sistemleri Uzmanı</p>
+            <a href="tel:05458320459" class="btn btn-primary btn-block">Hemen Ara</a>
+            <a href="https://wa.me/905458320459" class="btn btn-wp btn-block">WhatsApp Mesaj</a>
         </div>
-        
-        <model-viewer src="airbag.glb" auto-rotate camera-controls shadow-intensity="1" data-aos="zoom-in">
-        </model-viewer>
-    </section>
+    </div>
+</section>
 
-    <section class="container">
-        <h2 style="text-align:center; font-family:'Orbitron'; margin-bottom:50px;">Hizmetlerimiz</h2>
-        <div class="services-grid" id="hizmet-listesi">
-            <div class="card" data-aos="fade-up">
-                <i class="fas fa-microchip fa-2x" style="color:var(--primary)"></i>
-                <h3>Airbag Beyin Tamiri</h3>
-                <p>Kaza sonrası kilitlenen beyinlerin sıfırlanması ve programlanması.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-delay="100">
-                <i class="fas fa-car-crash fa-2x" style="color:var(--primary)"></i>
-                <h3>Emniyet Kemeri Tamiri</h3>
-                <p>Dirençsiz, orijinal standartlarda mekanizma ve halat onarımı.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-delay="200">
-                <i class="fas fa-stream fa-2x" style="color:var(--primary)"></i>
-                <h3>Direksiyon Sargı Tamiri</h3>
-                <p>Açı sensörü ve direksiyon kolon arızalarının kesin çözümü.</p>
-            </div>
-        </div>
-    </section>
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <h2 style="font-family:'Orbitron'; margin-bottom:20px;">Randevu Al</h2>
+        <form id="randevuForm">
+            <input type="text" id="cust-name" placeholder="Adınız Soyadınız" required>
+            <input type="tel" id="cust-tel" placeholder="Telefon Numaranız" required>
+            <input type="text" id="cust-plate" placeholder="Araç Plakası" required>
+            <select id="cust-service">
+                <option value="Genel Kontrol">Hizmet Seçin</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-block">TALEBİ GÖNDER</button>
+            <button type="button" onclick="closeModal()" class="btn btn-block" style="background:transparent;">Kapat</button>
+        </form>
+    </div>
+</div>
 
-    <section class="container">
-        <div class="ustalar-section">
-            <div class="usta-card" data-aos="flip-left">
-                <i class="fas fa-user-gear"></i>
-                <h3>Müslüm Usta</h3>
-                <p>Teknik Uzman & Airbag Beyin Yazılım</p>
-                <a href="tel:05457289717" class="btn btn-call"><i class="fas fa-phone"></i> Ara</a>
-                <a href="https://wa.me/905457289717" class="btn btn-wp"><i class="fab fa-whatsapp"></i></a>
-            </div>
+<footer class="container" style="text-align:center; padding:50px 0; opacity:0.6; font-size:0.9rem;">
+    <p>Şafak Mah. 5024. Sk. Akdeniz Sanayi Sitesi No:12 Kepez / Antalya</p>
+</footer>
 
-            <div class="usta-card" data-aos="flip-right">
-                <i class="fas fa-user-shield"></i>
-                <h3>Yavuz Usta</h3>
-                <p>Mekanik Onarım & Güvenlik Sistemleri</p>
-                <a href="tel:05458320459" class="btn btn-call"><i class="fas fa-phone"></i> Ara</a>
-                <a href="https://wa.me/905458320459" class="btn btn-wp"><i class="fab fa-whatsapp"></i></a>
-            </div>
-        </div>
-    </section>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
 
-    <footer style="text-align:center; padding:50px; border-top:1px solid var(--glass);">
-        <p>Şafak, 5024. Sk. Akdeniz Sanayi Sitesi No:12, Kepez/Antalya</p>
-        <p style="opacity:0.5; font-size:0.8rem;">© 2026 Sezgin Airbag. Tüm Hakları Saklıdır.</p>
-    </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1000, once: true });
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwi59ZVhP_fjvpMtrF6fBx9e8-p-qj4Kby19a-Miyt5F0C6llGiFUQgMyB5Ql_dTUtm/exec";
 
-        // Google Sheets API Entegrasyonu (Opsiyonel)
-        async function fetchServices() {
-            // Buraya Google Apps Script URL'ni yapıştıracaksın
-            // const url = 'SENIN_APPS_SCRIPT_URL_BURAYA';
-            // const response = await fetch(url);
-            // ... verileri listeleme mantığı
+    // Hizmetleri Çekme
+    async function getServices() {
+        try {
+            const response = await fetch(SCRIPT_URL);
+            const data = await response.json();
+            const container = document.getElementById('hizmetler-alani');
+            const select = document.getElementById('cust-service');
+            container.innerHTML = '';
+
+            data.forEach(hizmet => {
+                // Kartları Oluştur
+                container.innerHTML += `
+                    <div class="card" data-aos="fade-up">
+                        <i class="fas fa-shield-alt fa-2x" style="color:var(--primary)"></i>
+                        <h3 style="margin-top:15px;">${hizmet.HizmetAdı}</h3>
+                        <p style="font-size:0.9rem; opacity:0.8;">${hizmet.Aciklama}</p>
+                        <span class="price">${hizmet.Fiyat} ₺</span>
+                        <button onclick="openModal('${hizmet.HizmetAdı}')" class="btn btn-primary btn-block">Randevu Al</button>
+                    </div>
+                `;
+                // Select listesini doldur
+                let opt = document.createElement('option');
+                opt.value = hizmet.HizmetAdı;
+                opt.innerHTML = hizmet.HizmetAdı;
+                select.appendChild(opt);
+            });
+        } catch (e) {
+            console.log("Hata:", e);
         }
-    </script>
+    }
+
+    // Modal İşlemleri
+    function openModal(serviceName) {
+        document.getElementById('bookingModal').style.display = 'flex';
+        if(serviceName) document.getElementById('cust-service').value = serviceName;
+    }
+
+    function closeModal() {
+        document.getElementById('bookingModal').style.display = 'none';
+    }
+
+    // Randevu Gönderimi
+    document.getElementById('randevuForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        btn.innerHTML = "Gönderiliyor...";
+        
+        const payload = {
+            ad: document.getElementById('cust-name').value,
+            tel: document.getElementById('cust-tel').value,
+            plaka: document.getElementById('cust-plate').value,
+            hizmet: document.getElementById('cust-service').value
+        };
+
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            });
+            alert("Randevunuz iletildi. Müslüm veya Yavuz Usta size dönüş yapacaktır.");
+            closeModal();
+            e.target.reset();
+        } catch (err) {
+            alert("Bir hata oluştu.");
+        }
+        btn.innerHTML = "TALEBİ GÖNDER";
+    });
+
+    window.onload = getServices;
+</script>
+
 </body>
 </html>
